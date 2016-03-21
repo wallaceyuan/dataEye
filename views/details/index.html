@@ -1,0 +1,228 @@
+<%- include ../include/header.html%>
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <table class="general">
+                    <tbody>
+                    <tr>
+                        <td><i class="hd-task"></i> <span>任务说明</span></td>
+                        <td id="desc">上海发布历史考试</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12" id="detailDataTable">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="general-recent clearfix">
+                        <p class="general-recent-title">
+                            <i class="hd-pv"></i><span><%=today_pv%></span>
+                        </p>
+                        <p>
+                            当天截止至<%=timestamp%>累计总量
+                        </p>
+                        <p>
+                            <span class="horizontal-line-shore"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="general-recent clearfix">
+                        <p class="general-recent-title">
+                            <i class="hd-uv"></i><span><%=delta_pv%></span>
+                        </p>
+                        <p>
+                            最新一小时
+                        </p>
+                        <p>
+                            <span class="horizontal-line-shore"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="general-recent clearfix">
+                        <p class="general-recent-title">
+                            <i class="icon icon-stayTime"></i><span><%=yesterday_pv%></span>
+                        </p>
+                        <p>
+                            昨日
+                        </p>
+                        <p>
+                            <span class="horizontal-line-shore"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading no-bottom">
+        <div>
+            <h4 class="panel-heading-title"><i class="icon icon-mark" data-mark="share_level"></i> 数据饼图</h4>
+        </div>
+    </div>
+    <div id="main" class="container-fluid" style="height:800px;"></div>
+</div>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <h2 class="sub-header">今日排行</h2>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Click</th>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for(var i=0; i<total_amount.length; i++) {%>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%=total_amount[i].clicknum%></td>
+                            <td><a href="<%=total_amount[i].pageurl%>"><%=total_amount[i].title%></a></td>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <h2 class="sub-header">一小时排行</h2>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Click</th>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for(var i=0; i<total_amount.length; i++) {%>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%=total_amount[i].clicknum%></td>
+                            <td><a href="<%=total_amount[i].pageurl%>"><%=total_amount[i].title%></a></td>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<h2 class="sub-header">今日排行</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Click</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0; i<total_amount.length; i++) {%>
+        <tr>
+            <td><%=i+1%></td>
+            <td><%=total_amount[i].clicknum%></td>
+            <td><a href="<%=total_amount[i].pageurl%>"><%=total_amount[i].title%></a></td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+</div>
+<h2 class="sub-header">一小时排行</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Click</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0; i<total_amount.length; i++) {%>
+        <tr>
+            <td><%=i+1%></td>
+            <td><%=total_amount[i].clicknum%></td>
+            <td><a href="<%=total_amount[i].pageurl%>"><%=total_amount[i].title%></a></td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+</div>-->
+<script src="lib/js/echarts.js"></script>
+<script type="text/javascript">
+    var nameBox = <%- JSON.stringify(nameBox) %>;
+    var dataBox = <%- JSON.stringify(dataBox) %>;
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:nameBox
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                selectedMode: 'single',
+                radius: [0, '30%'],
+                label: {
+                    normal: {
+                    position: 'inner'
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:dataBox
+            },
+            {
+                name:'访问来源',
+                type:'pie',
+                radius: ['40%', '55%'],
+                data:dataBox
+            }
+        ]
+    };
+    myChart.setOption(option);
+    
+</script>
+
+
+<%- include ../include/footer.html%>

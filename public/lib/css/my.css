@@ -1,0 +1,64 @@
+body {
+    font: 14px Helvetica,"Microsoft YaHei",微软雅黑,"HelveticaNeue","Helvetica Neue",Arial;
+    color: #333;
+    background-color: white;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.panel {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.panel-default {
+    border-color: #dddddd;
+}
+
+.panel .panel-heading .panel-heading-title {
+    font-size: 18px;
+    float: left;
+    padding: 0 15px;
+    position: relative;
+}
+
+.panel-default>.panel-heading {
+    color: #333333;
+    background-color: whitesmoke;
+    border-color: #dddddd;
+}
+.panel-heading.no-bottom {
+    border-bottom: none;
+    padding-top: 16px !important;
+}
+
+.panel-default>.panel-heading, .panel-footer {
+    background-color: #fff;
+}
+
+.general tr td:nth-child(1) {
+    color: #333;
+    font-weight: bold;
+}
+.general tr td {
+    height: 37px;
+    min-width: 125px;
+    font-size: 14px;
+}
+
+.hd-task {
+    background-position: 0 -455px;
+    height: 16px;
+    width: 14px;
+}
+.hd-sprite, .hd-android, .hd-arrow-down, .hd-arrow-sort, .hd-arrow-up, .hd-computer, .hd-download, .hd-edit, .hd-ellipsis, .hd-host, .hd-ios, .hd-ip, .hd-less, .hd-more, .hd-phone, .hd-pv, .hd-share, .hd-task, .hd-time, .hd-tip, .hd-update-green, .hd-update, .hd-uv, .hd-fre {
+    background-image: url('../images/icon-hd.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
