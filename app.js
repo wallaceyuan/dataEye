@@ -44,7 +44,7 @@ app.use('/details',function(req,res,next){
       var source_pv = data['pv'].source_pv;
       var nameBox = [];var dataBox = [];var count = 0;
       for(var key in source_pv){
-        if(count<20){
+        if(count<6){
           count++;
           nameBox.push(key);
           dataBox.push({value:source_pv[key], name:key});

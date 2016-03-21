@@ -151,16 +151,17 @@
         </div>
     </div>
 </div>
-<script src="/lib/js/echarts.js"></script>
+<script src="lib/js/echarts.js"></script>
+<!--
 <script type="text/javascript">
     var nameBox = <%- JSON.stringify(nameBox) %>;
-    var dataBox = <%- JSON.stringify(dataBox) %>;
-    var timeBox = <%- JSON.stringify(timeBox) %>;
-    var clickBox = <%- JSON.stringify(clickBox) %>;
-    var dtBox = <%- JSON.stringify(dtBox) %>;
-    var dclickBox = <%- JSON.stringify(dclickBox) %>;
+            var dataBox = <%- JSON.stringify(dataBox) %>;
+            var timeBox = <%- JSON.stringify(timeBox) %>;
+            var clickBox = <%- JSON.stringify(clickBox) %>;
+            var dtBox = <%- JSON.stringify(dtBox) %>;
+            var dclickBox = <%- JSON.stringify(dclickBox) %>;
 
-    var myChart = echarts.init(document.getElementById('main'));
+            var myChart = echarts.init(document.getElementById('main'));
     var preChart = echarts.init(document.getElementById('pre'));
     var todayChart = echarts.init(document.getElementById('today'));
 
@@ -181,17 +182,17 @@
                 type:'pie',
                 selectedMode: 'single',
                 radius: [0, '30%'],
-                label: {
-                    normal: {
-                    position: 'inner'
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:dataBox
+            label: {
+        normal: {
+        position: 'inner'
+    }
+    },
+            labelLine: {
+        normal: {
+        show: false
+    }
+    },
+            data:dataBox
             },
             {
                 name:'访问来源',
@@ -199,82 +200,83 @@
                 radius: ['40%', '55%'],
                 data:dataBox
             }
-        ]
-    };
+            ]
+            };
 
 
-    myChart.setOption(option);
-    
-    
-    pre = {
+            myChart.setOption(option);
+
+
+            pre = {
         title: {
-            text: '往期PV'
-        },
+        text: '往期PV'
+    },
         tooltip: {},
         legend: {
-            data:['PV']
-        },
+        data:['PV']
+    },
         xAxis: {
-            data: timeBox
-        },
+        data: timeBox
+    },
         yAxis: {},
         series: [{
-            name: 'PV',
-            type: 'bar',
-            data: clickBox
-        }]
+        name: 'PV',
+        type: 'bar',
+        data: clickBox
+    }]
     };
-    
-    preChart.setOption(pre);
+
+            preChart.setOption(pre);
 
 
-    today = {
+            today = {
         title: {
-            text: '今日PV'
-        },
+        text: '今日PV'
+    },
         tooltip : {
-            trigger: 'axis'
-        },
+        trigger: 'axis'
+    },
         legend: {
-            data:['今日PV']
-        },
+        data:['今日PV']
+    },
         toolbox: {
-            feature: {
-                saveAsImage: {}
-            }
-        },
+        feature: {
+        saveAsImage: {}
+    }
+    },
         grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
         xAxis : [
-            {
-                type : 'category',
-                boundaryGap : false,
-                data : dtBox
-            }
+    {
+        type : 'category',
+        boundaryGap : false,
+        data : dtBox
+    }
         ],
         yAxis : [
-            {
-                type : 'value'
-            }
+    {
+        type : 'value'
+    }
         ],
         series : [
-            {
-                name:'PV',
-                type:'line',
-                stack: '总量',
-                areaStyle: {normal: {}},
-                data:dclickBox
-            }
+    {
+        name:'PV',
+        type:'line',
+        stack: '总量',
+        areaStyle: {normal: {}},
+        data:dclickBox
+    }
         ]
     };
-    
-    todayChart.setOption(today);
+
+            todayChart.setOption(today);
 
 </script>
+-->
 
 
 <%- include ../include/footer.html%>
