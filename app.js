@@ -21,7 +21,7 @@ app.set('view engine', 'html');
 //设置一下对于html格式的文件，渲染的时候委托ejs的渲染方面来进行渲染
 app.engine('html', require('ejs').renderFile);
 var mongoose = require('mongoose');
-connection = mongoose.createConnection('mongodb://127.0.0.1:27017/dataEye');
+connection = mongoose.createConnection('mongodb://123.57.143.189:27017/yuanblog');
 app.use(session({
   secret: 'dataEye',
   resave: false,
