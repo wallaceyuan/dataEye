@@ -21,7 +21,8 @@ app.set('view engine', 'html');
 //设置一下对于html格式的文件，渲染的时候委托ejs的渲染方面来进行渲染
 app.engine('html', require('ejs').renderFile);
 var mongoose = require('mongoose');
-connection = mongoose.createConnection('mongodb://123.57.143.189:27017/yuanblog');
+connection = mongoose.createConnection('mongodb://127.0.0.1:27017/yuanblog');
+
 app.use(session({
   secret: 'dataEye',
   resave: false,
@@ -31,41 +32,6 @@ app.use(session({
 }));
 
 
-app.use('/details',function(req,res,next){
-/*  if(req.session.nameBox){
-    console.log('缓存');
-    res.locals.nameBox = res.nameBox = req.session.nameBox;
-    next();
-  }else{
-    console.log('取数据');*/
-    var url = 'http://api.kankanews.com/wechat/wxmp/kkpsc/kkpsc.json?openid=o81pDuLcFI2sNfOuLFYk9RlfSLWc&cmd=getIndex';
-    request(url, function (error, response, body) {
-      var data = JSON.parse(body);
-      var source_pv = data['pv'].source_pv;
-      var nameBox = [];var dataBox = [];var count = 0;
-      for(var key in source_pv){
-        if(count<6){
-          count++;
-          nameBox.push(key);
-          dataBox.push({value:source_pv[key], name:key});
-        }
-      }
-      var pageurl = data['pageurl'];
-      res.total_amount = pageurl['total_amount'];
-      res.total_delta = pageurl['total_delta'];
-      res.dataBox = dataBox;
-      res.timestamp = data.timestamp;
-      res.delta_pv = data['pv'].delta_pv;
-      res.today_pv = data['pv'].today_pv;
-      res.yesterday_pv = data['pv'].yesterday_pv;
-
-      res.nameBox = res.locals.nameBox = req.session.nameBox = nameBox;
-      next();
-    });
-/*
-  }
-*/
-});
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -78,7 +44,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/details', details);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

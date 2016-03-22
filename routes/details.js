@@ -1,18 +1,23 @@
-/**
- * Created by yuan on 2016/3/21.
- */
 var express = require('express');
-var router = express.Router();
 var request = require('request');
+var router = express.Router();
+var mime = require('mime');
 
 // 没有挂载路径的中间件，应用的每个请求都会执行该中间件
 /* GET users listing. */
 router.use('/',function(req,res,next){
+    if(mime.lookup(req.url) != 'application/octet-stream'){
+        return;
+    }
+/*    if(req.url != '/'){
+        return;
+    }*/
     var d = new Date();
     var etime = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 0).getTime()/1000;
     var stime = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0).getTime()/1000;
-    var url= "http://api.kankanews.com/wechat/wxmp/kkpsc/all.json?openid=o81pDuLcFI2sNfOuLFYk9RlfSLWc&stime="+stime+"&etime="+etime+"&cmd=getPastData";
+    var url = "http://api.kankanews.com/wechat/wxmp/kkpsc/all.json?openid=o81pDuLcFI2sNfOuLFYk9RlfSLWc&stime="+stime+"&etime="+etime+"&cmd=getPastData";
     request(url, function (error, response, body) {
+        console.log('req.url','昨天今天',req.url);
         var prevData = JSON.parse(body);
         var timeBox = [];var clickBox = [];var dtBox = [];var dclickBox = [];
         for(var key in prevData.clicknum){
@@ -28,7 +33,47 @@ router.use('/',function(req,res,next){
     });
 });
 
+router.use('/',function(req,res,next){
+    if(mime.lookup(req.url) != 'application/octet-stream'){
+        return;
+    }
+    /*  if(req.session.nameBox){
+     console.log('缓存');
+     res.locals.nameBox = res.nameBox = req.session.nameBox;
+     next();
+     }else{
+     console.log('取数据');*/
+    var url = 'http://api.kankanews.com/wechat/wxmp/kkpsc/kkpsc.json?openid=o81pDuLcFI2sNfOuLFYk9RlfSLWc&cmd=getIndex';
+    request(url, function (error, response, body) {
+        console.log('req.url','侧边栏',req.url);
+        var data = JSON.parse(body);
+        var source_pv = data['pv'].source_pv;
+        var nameBox = [];var dataBox = [];var count = 0;
+        for(var key in source_pv){
+            if(count<6){
+                count++;
+                nameBox.push(key);
+                dataBox.push({value:source_pv[key], name:key});
+            }
+        }
+        var pageurl = data['pageurl'];
+        res.total_amount = pageurl['total_amount'];
+        res.total_delta = pageurl['total_delta'];
+        res.dataBox = dataBox;
+        res.timestamp = data.timestamp;
+        res.delta_pv = data['pv'].delta_pv;
+        res.today_pv = data['pv'].today_pv;
+        res.yesterday_pv = data['pv'].yesterday_pv;
+
+        res.nameBox = res.locals.nameBox = req.session.nameBox = nameBox;
+        next();
+    });
+});
+
+
+
 router.get('/', function(req, res, next) {
+    console.log('主页',req.url);
     var total_amount = res.total_amount;
     var total_delta = res.total_delta;
     var dataBox = res.dataBox;
@@ -57,6 +102,7 @@ router.get('/list/:name', function(req, res, next) {
     var kkapi = "http://api.kankanews.com/wechat/wxmp/kkpsc/"+name+".json?openid=o81pDuLcFI2sNfOuLFYk9RlfSLWc&cmd=getSource&source="+name;
     request(kkapi, function (error, response, body) {
         var data = JSON.parse(body);
+        console.log('详细',req.url);
 /*        var source_pv = data['pv'].source_pv;
         var nameBox = [];var dataBox = [];var count = 0;
         for(var key in source_pv){
