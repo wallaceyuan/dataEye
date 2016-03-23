@@ -59,10 +59,13 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">全站<span class="sr-only">(current)</span></a></li>
+                <li <% if (click == 'all') { %> class='active' <% } %>><a href="/details/main">全站<span class="sr-only">(current)</span></a></li>
+                <li class="bother"><a href="/details/now/all" class="list-group-item">详细</a></li>
                 <% for(var key in nameBox){ %>
-                <li><a href="/details/list/<%=nameBox[key]%>"><%=nameBox[key]%></a></li>
+                <li <% if (click == nameBox[key]) { %> class='active' <% } %>><a href="/details/list/<%=nameBox[key]%>"><%=nameBox[key]%></a></li>
+                <li class="bother"><a href="/details/now/<%=nameBox[key]%>">详细</a></li>
+                <li class="bother"><a href="/details/pre/<%=nameBox[key]%>">往期</a></li>
                 <%}%>
-            </ul>
+            </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

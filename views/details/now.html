@@ -1,0 +1,65 @@
+<%- include ../include/header.html%>
+<%title%>
+<div class="ds-row">
+    <div class="col-lg-6 col-md-6">
+        <div class="panel panel-default">
+            <div id="today" class="container-fluid" style="height:350px;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="http://114.80.151.109/spa/m/2015kkpsc/new/js/echarts.js"></script>
+<script type="text/javascript">
+    var timeBox = <%- JSON.stringify(timeBox) %>;
+    var clickBox = <%- JSON.stringify(clickBox) %>;
+    var todayChart = echarts.init(document.getElementById('today'));
+    today = {
+        title: {
+            text: '今日PV'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['今日PV']
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+            },
+            xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : timeBox
+            }
+            ],
+            yAxis : [
+            {
+                type : 'value'
+            }
+            ],
+            series : [
+            {
+                name:'PV',
+                type:'line',
+                stack: '总量',
+                areaStyle: {normal: {}},
+                data:clickBox
+            }
+            ]
+            };
+
+            todayChart.setOption(today);
+
+
+</script>
+
+<%- include ../include/footer.html%>

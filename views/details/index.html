@@ -69,7 +69,7 @@
     <div id="main" class="container-fluid" style="height:500px;"></div>
 </div>
 
-<div class="ds-row">
+<!--<div class="ds-row">
     <div class="col-lg-6 col-md-6">
         <div class="panel panel-default">
             <div id="pre" class="container-fluid" style="height:350px;"></div>
@@ -80,7 +80,7 @@
             <div id="today" class="container-fluid" style="height:350px;"></div>
         </div>
     </div>
-</div>
+</div>-->
 
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -151,19 +151,12 @@
         </div>
     </div>
 </div>
+
 <script src="/lib/js/echarts.js"></script>
 <script type="text/javascript">
     var nameBox = <%- JSON.stringify(nameBox) %>;
     var dataBox = <%- JSON.stringify(dataBox) %>;
-    var timeBox = <%- JSON.stringify(timeBox) %>;
-    var clickBox = <%- JSON.stringify(clickBox) %>;
-    var dtBox = <%- JSON.stringify(dtBox) %>;
-    var dclickBox = <%- JSON.stringify(dclickBox) %>;
-
     var myChart = echarts.init(document.getElementById('main'));
-    var preChart = echarts.init(document.getElementById('pre'));
-    var todayChart = echarts.init(document.getElementById('today'));
-
 
     option = {
         tooltip: {
@@ -202,77 +195,7 @@
         ]
     };
 
-
     myChart.setOption(option);
-    
-    
-    pre = {
-        title: {
-            text: '往期PV'
-        },
-        tooltip: {},
-        legend: {
-            data:['PV']
-        },
-        xAxis: {
-            data: timeBox
-        },
-        yAxis: {},
-        series: [{
-            name: 'PV',
-            type: 'bar',
-            data: clickBox
-        }]
-    };
-    
-    preChart.setOption(pre);
-
-
-    today = {
-        title: {
-            text: '今日PV'
-        },
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['今日PV']
-        },
-        toolbox: {
-            feature: {
-                saveAsImage: {}
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                boundaryGap : false,
-                data : dtBox
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : [
-            {
-                name:'PV',
-                type:'line',
-                stack: '总量',
-                areaStyle: {normal: {}},
-                data:dclickBox
-            }
-        ]
-    };
-    
-    todayChart.setOption(today);
 
 </script>
 
